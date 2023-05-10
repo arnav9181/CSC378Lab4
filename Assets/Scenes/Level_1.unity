@@ -739,7 +739,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bow: {fileID: 803469733}
   arrow: {fileID: 2070019486602446322, guid: 3af97114cf23de14e9c5fea74965d3b2, type: 3}
-  launch: 14
+  launchSpeed: 15
   shotPoint: {fileID: 1079057508}
 --- !u!114 &803469735
 MonoBehaviour:

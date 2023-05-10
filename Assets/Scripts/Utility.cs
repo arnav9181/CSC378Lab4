@@ -4,15 +4,31 @@ using UnityEngine;
 
 public class Utility : MonoBehaviour
 {
-    public static float AngleTowardsMouse(Vector3 pos)
+    public static bool isFlipped = false;
+
+    public static float getAngleTowardsMouse(Vector3 pos)
     {
         Vector3 mousePos = Input.mousePosition;
-        mousePos.z = 5.23f;
         Vector3 objectPos = Camera.main.WorldToScreenPoint(pos);
-        mousePos.x = mousePos.x - objectPos.x;
-        mousePos.y = mousePos.y - objectPos.y;
+        return getAngle2D(objectPos, mousePos);
+    }
 
-        float angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg; 
-        return angle; 
+    public static float getAngle2D(Vector2 drn) {
+        if (isFlipped) {
+            drn *= -1;
+        }
+        return Mathf.Atan2(drn.y, drn.x) * Mathf.Rad2Deg;
+    }
+
+    public static float getAngle2D(Vector3 curPos, Vector3 destPos) {
+        Vector2 drn = new Vector2(destPos.x - curPos.x, destPos.y - curPos.y);
+        return getAngle2D(drn);
+    }
+
+    public static int getDirection() {
+        if (isFlipped) {
+            return -1;
+        }
+        return 1;
     }
 }

@@ -9,6 +9,5 @@ public class Menu : MonoBehaviour
     {
         SceneManager.LoadScene("Level_1");
     }
-
 }
 

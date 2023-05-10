@@ -19,22 +19,22 @@ public class Arrow : MonoBehaviour
     {
         //RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.up, distance, whatIsSolid);
 
-        if (isHit == false)
+        if (!isHit)
         {
-            float angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
+            float angle = Utility.getAngle2D(rb.velocity);
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward); 
         }
 
+    }
+
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        stopMotion();
     }
 
     private void stopMotion() {
         isHit = true;
         rb.velocity = Vector2.zero;
         rb.isKinematic = true;
-    }
-
-    private void OnCollisionEnter2D(Collision2D col)
-    {
-        stopMotion();
     }
 }
