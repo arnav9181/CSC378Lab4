@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Arrow : MonoBehaviour
 {
+    
     Rigidbody2D rb;
     bool isHit = false;
     public float distance;
@@ -27,14 +29,17 @@ public class Arrow : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter2D(Collision2D col)
-    {
-        stopMotion();
-    }
-
     private void stopMotion() {
         isHit = true;
         rb.velocity = Vector2.zero;
         rb.isKinematic = true;
     }
+
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        Orcs.destroyEnemy(col.gameObject);
+        stopMotion();
+    }
+
+
 }
