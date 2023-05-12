@@ -6,10 +6,7 @@ using TMPro;
 
 public class Orcs : MonoBehaviour
 {
-     public GameObject person;
-    public TMP_Text countText;
-    // public TMP_Text levelText;
-
+    public GameObject person;
     private string enemyID;
 
     private static int killCount = 0;
@@ -27,8 +24,7 @@ public class Orcs : MonoBehaviour
 
     private void Update()
     {
-        countText.SetText("Kills: " + killCount);
-        // levelText.SetText("Level: " + currentLevel); 
+        
     }
 
     private void spawnEnemy()
@@ -51,14 +47,21 @@ public class Orcs : MonoBehaviour
     private void spawnLevel()
     {
         
-        spawnEnemy();
+        if (killCount < levelGoals[currentLevel, 0] && enemyCount == 0)
+        {
             
-        
+            spawnEnemy();
+            
+        }
+            
     }
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        Destroy(col.gameObject, 0.01f); 
+        if(col.gameObject.tag.Contains("Arrow"))
+        {
+            Destroy(col.gameObject, 0.01f); 
+        }
 
 
         if (killCount == levelGoals[currentLevel, 0])
