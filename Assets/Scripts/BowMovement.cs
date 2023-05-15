@@ -5,8 +5,7 @@ using UnityEngine;
 public class BowMovement : MonoBehaviour
 {
     [SerializeField] Transform bow;
-    public GameObject arrow; 
-    public float launchSpeed; 
+    public GameObject arrow;
     public Transform shotPoint;
 
     // Start is called before the first frame update
@@ -19,20 +18,13 @@ public class BowMovement : MonoBehaviour
     void Update()
     {
        rotateBow();   
-        if (Input.GetMouseButtonDown(0))
-        {
-            shootArrow();
+        if (Input.GetMouseButtonDown(0)){
+            GameLevel.spawnArrow(shotPoint.position, shotPoint.rotation, transform.right);
         } 
     }
 
     void rotateBow(){
         float angle = Utility.getAngleTowardsMouse(bow.position);
         bow.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
-    }
-
-    void shootArrow(){
-        GameObject newArrow = Instantiate(arrow, shotPoint.position, shotPoint.rotation);
-        newArrow.GetComponent<Rigidbody2D>().velocity = transform.right * launchSpeed * Utility.getDirection();
-        Destroy(newArrow, 2);
     }
 }

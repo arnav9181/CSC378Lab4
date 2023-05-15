@@ -6,75 +6,31 @@ using TMPro;
 
 public class Orcs : MonoBehaviour
 {
-    public GameObject person;
-    private string enemyID;
+    private GameObject player;
+    private GameObject enemy;
 
-    private static int killCount = 0;
-    private static int enemyCount = 0;
-    private static int currentLevel = 0;
-    private readonly int[,] levelGoals = {
-        {8, 1},
-        {12, 2}
-    };
+    private string enemyID; 
+    private float speed;
+
+    private float distance;
 
     private void Start()
     {
-        spawnEnemy();
+        enemyID = GameLevel.getOrcId();
+        player = GameLevel.getPlayer();
+        enemy = GameObject.Find(enemyID);
+        speed = 3;
     }
 
     private void Update()
     {
-        
+        enemy = GameObject.Find(enemyID);
+        // distance = Vector2.Distance(player.transform.position, enemy.transform.position);
+        Vector2 direction = player.transform.position - enemy.transform.position; 
+        enemy.transform.position = Vector2.MoveTowards(enemy.transform.position, player.transform.position, speed * Time.deltaTime);
     }
 
-    private void spawnEnemy()
-    {
-        Vector3 pos = new Vector3(Random.Range(-10.0f, 10.0f), Random.Range(-5.0f, 5.0f), 0);
-        GameObject enemy = Instantiate(person, pos, Quaternion.Euler(Vector3.zero));
-        enemyID = $"ENEMY_{currentLevel}_{enemyCount}_{killCount}";
-        enemy.name = enemyID;
-        enemy.AddComponent<BoxCollider2D>();
-        enemyCount++;
-    }
-
-    public static void destroyEnemy(GameObject enemy)
-    {
-        Destroy(enemy);
-        enemyCount--;
-        killCount++;
-    }
-
-    private void spawnLevel()
-    {
-        
-        if (killCount < levelGoals[currentLevel, 0] && enemyCount == 0)
-        {
-            
-            spawnEnemy();
-            
-        }
-            
-    }
-
-    private void OnCollisionEnter2D(Collision2D col)
-    {
-        if(col.gameObject.tag.Contains("Arrow"))
-        {
-            Destroy(col.gameObject, 0.01f); 
-        }
-
-
-        if (killCount == levelGoals[currentLevel, 0])
-        {
-            killCount = 0;
-            enemyCount = 0;
-            currentLevel++;
-            if (currentLevel == levelGoals.GetLength(0))
-            {
-                return;
-            }
-        }
-
-        spawnLevel();
+    public string getOrcID() {
+        return enemyID;
     }
 }
