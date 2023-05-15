@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private int health;
+    public static int health;
     private HashSet<string> attackedOrcIDs = new HashSet<string>();
 
     // Start is called before the first frame update

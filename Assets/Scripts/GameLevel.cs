@@ -23,6 +23,7 @@ public class GameLevel : MonoBehaviour
     private static int enemyCount = 0;
     private static int currentLevel = 0;
     private static float arrowLaunchSpeed = 14.0f;
+    private static int totalKills = 0; 
     
     public static readonly int[,] levelGoals = {
         {10, 1},
@@ -48,7 +49,7 @@ public class GameLevel : MonoBehaviour
     public static void spawnOrc() {
         string newOrcID = $"Orc_{initializedOrcsCount++}";
         initializedOrcs.Enqueue(newOrcID);
-        Vector3 pos = new Vector3(Random.Range(-10.0f, 10.0f), Random.Range(-4.0f, 5.0f), 0);
+        Vector3 pos = new Vector3(Random.Range(-4.0f, 4.0f), Random.Range(-4.0f, 5.0f), 0);
         GameObject newOrc = Instantiate(orcPrefab, pos, Quaternion.Euler(Vector3.zero));
         newOrc.name = newOrcID;
         enemyCount++;
@@ -59,6 +60,8 @@ public class GameLevel : MonoBehaviour
         Destroy(orcObject);
         enemyCount--;
         killCount++;
+        totalKills++;
+        Debug.Log(totalKills);
 
         if (killCount == levelGoals[currentLevel, 0]) {
             killCount = 0;
@@ -75,6 +78,10 @@ public class GameLevel : MonoBehaviour
             for (int i=0; i<levelGoals[currentLevel, 1]; i++) {
                 spawnOrc();
             }
+        }
+        if(totalKills == 35)
+        {
+            Debug.Log("You win");
         }
     }
 
