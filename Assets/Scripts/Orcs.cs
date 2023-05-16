@@ -10,6 +10,7 @@ public class Orcs : MonoBehaviour
     private GameObject enemy;
 
     private string enemyID;
+    
     private float speed;
 
     private void Start()

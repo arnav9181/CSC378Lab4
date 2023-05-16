@@ -7,6 +7,8 @@ public class BowMovement : MonoBehaviour
     [SerializeField] Transform bow;
     public GameObject arrow;
     public Transform shotPoint;
+    private float timeBetShots; 
+    public float startTimeBetShots; 
 
     // Start is called before the first frame update
     void Start()
@@ -18,9 +20,16 @@ public class BowMovement : MonoBehaviour
     void Update()
     {
        rotateBow();   
-        if (Input.GetMouseButtonDown(0)){
-            GameLevel.spawnArrow(shotPoint.position, shotPoint.rotation, transform.right);
-        } 
+        if (timeBetShots <=0)
+        {
+            if (Input.GetMouseButtonDown(0)){
+                GameLevel.spawnArrow(shotPoint.position, shotPoint.rotation, transform.right);
+                timeBetShots = startTimeBetShots; 
+            } 
+        }
+        else{
+            timeBetShots -= Time.deltaTime;
+        }
     }
 
     void rotateBow(){
