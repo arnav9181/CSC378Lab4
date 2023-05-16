@@ -32,6 +32,7 @@ public class GameLevel : MonoBehaviour
     private static int enemyCount = 0;
     private static int currentLevel = 0;
     private static float arrowLaunchSpeed = 14.0f;
+    private static float orcMovementSpeed = 3.0f;
     private static int totalKills = 0; 
     
     public static readonly int[,] levelGoals = {
@@ -79,6 +80,7 @@ public class GameLevel : MonoBehaviour
             killCount = 0;
             enemyCount = 0;
             currentLevel++;
+            orcMovementSpeed += 0.75f;
             if (currentLevel == levelGoals.GetLength(0))
             {
                 return;
@@ -101,6 +103,10 @@ public class GameLevel : MonoBehaviour
         return initializedOrcs.Dequeue();
     }
 
+    public static float getOrcMovementSpeed() {
+        return orcMovementSpeed;
+    }
+
     public static GameObject getPlayer() {
         return playerObj;
     }
@@ -112,6 +118,10 @@ public class GameLevel : MonoBehaviour
         initializedArrows.Enqueue(newArrowID);
         GameObject newArrow = Instantiate(arrowPrefab, position, rotation);
         newArrow.name = newArrowID;
+        if (Utility.isFlipped) {
+        Transform transform = newArrow.GetComponent<Transform>(); 
+        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        }
         newArrow.GetComponent<Rigidbody2D>().velocity = direction * arrowLaunchSpeed * Utility.getDirection();
     }
 

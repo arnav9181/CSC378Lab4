@@ -9,6 +9,7 @@ public class Arrow : MonoBehaviour
     private Rigidbody2D rb;
 
     private bool collided;
+    private float direction;
     
     private string arrowID;
 
@@ -17,6 +18,7 @@ public class Arrow : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         arrowID = GameLevel.getArrowId();
+        direction = Utility.getDirection();
         collided = false;
     }
 
@@ -25,7 +27,7 @@ public class Arrow : MonoBehaviour
     {
         if (!collided)
         {
-            float angle = Utility.getAngle2D(rb.velocity);
+            float angle = Utility.getAngle2D(direction * rb.velocity);
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward); 
         }
     }

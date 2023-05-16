@@ -13,16 +13,20 @@ public class Utility : MonoBehaviour
         return getAngle2D(objectPos, mousePos);
     }
 
-    public static float getAngle2D(Vector2 drn) {
+    public static float getRotatedAngle2D(Vector2 drn) {
         if (isFlipped) {
             drn *= -1;
         }
         return Mathf.Atan2(drn.y, drn.x) * Mathf.Rad2Deg;
     }
 
+    public static float getAngle2D(Vector2 drn) {
+        return Mathf.Atan2(drn.y, drn.x) * Mathf.Rad2Deg;
+    }
+
     public static float getAngle2D(Vector3 curPos, Vector3 destPos) {
         Vector2 drn = new Vector2(destPos.x - curPos.x, destPos.y - curPos.y);
-        return getAngle2D(drn);
+        return getRotatedAngle2D(drn);
     }
 
     public static int getDirection() {

@@ -9,23 +9,20 @@ public class Orcs : MonoBehaviour
     private GameObject player;
     private GameObject enemy;
 
-    private string enemyID; 
+    private string enemyID;
     private float speed;
-
-    private float distance;
 
     private void Start()
     {
         enemyID = GameLevel.getOrcId();
         player = GameLevel.getPlayer();
         enemy = GameObject.Find(enemyID);
-        speed = 3;
+        speed = GameLevel.getOrcMovementSpeed();
     }
 
     private void Update()
     {
         enemy = GameObject.Find(enemyID);
-        // distance = Vector2.Distance(player.transform.position, enemy.transform.position);
         Vector2 direction = player.transform.position - enemy.transform.position; 
         enemy.transform.position = Vector2.MoveTowards(enemy.transform.position, player.transform.position, speed * Time.deltaTime);
     }
