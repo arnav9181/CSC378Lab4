@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
             attackedOrcIDs.Add(objectID);
             health--;
             if (health == 0) {
-                Debug.Log("You Died :p");
+                
             }
         }
     }
