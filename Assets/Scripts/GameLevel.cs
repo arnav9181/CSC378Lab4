@@ -62,7 +62,7 @@ public class GameLevel : MonoBehaviour
     public static void spawnOrc() {
         string newOrcID = $"Orc_{initializedOrcsCount++}";
         initializedOrcs.Enqueue(newOrcID);
-        Vector3 pos = new Vector3(Random.Range(-4.0f, 4.0f), Random.Range(-4.0f, 5.0f), 0);
+        Vector3 pos = new Vector3(Random.Range(-10.0f, 10.0f), Random.Range(-4.0f, 9.0f), 0);
         GameObject newOrc = Instantiate(orcPrefab, pos, Quaternion.Euler(Vector3.zero));
         newOrc.name = newOrcID;
         enemyCount++;
