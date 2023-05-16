@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
 public class GameLevel : MonoBehaviour
 {
@@ -8,7 +11,13 @@ public class GameLevel : MonoBehaviour
     public GameObject initialArrowPrefab;
 
     public GameObject initialPlayerObj;
+    public TextMeshProUGUI myText;
+    public TextMeshProUGUI levelCounter;
+    public AudioSource src; 
+    public AudioClip clip1; 
 
+    private static AudioSource initSrc; 
+    private static AudioClip initClip; 
     private static GameObject orcPrefab;
     private static GameObject arrowPrefab;
 
@@ -34,6 +43,8 @@ public class GameLevel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        initSrc = src; 
+        initClip = clip1; 
         orcPrefab = initialOrcPrefab;
         arrowPrefab = initialArrowPrefab;
         playerObj = initialPlayerObj;
@@ -43,7 +54,8 @@ public class GameLevel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        myText.text = string.Format("Kills = {0}", totalKills);  
+        levelCounter.text = string.Format("Level = {0}", currentLevel+1);  
     }
 
     public static void spawnOrc() {
@@ -79,9 +91,9 @@ public class GameLevel : MonoBehaviour
                 spawnOrc();
             }
         }
-        if(totalKills == 35)
+        if(totalKills >= 34)
         {
-            Debug.Log("You win");
+            SceneManager.LoadScene("EndGame");
         }
     }
 
@@ -95,6 +107,8 @@ public class GameLevel : MonoBehaviour
 
     public static void spawnArrow(Vector3 position, Quaternion rotation, Vector3 direction) {
         string newArrowID = $"Arrow_{initializedArrowsCount++}";
+        initSrc.clip = initClip; 
+        initSrc.Play();
         initializedArrows.Enqueue(newArrowID);
         GameObject newArrow = Instantiate(arrowPrefab, position, rotation);
         newArrow.name = newArrowID;

@@ -9,5 +9,10 @@ public class Menu : MonoBehaviour
     {
         SceneManager.LoadScene("Level_1");
     }
+
+    public void ExitGame()
+    {
+        SceneManager.LoadScene("SampleScene");
+    }
 }
 
