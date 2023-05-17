@@ -80,7 +80,7 @@ public class GameLevel : MonoBehaviour
             killCount = 0;
             enemyCount = 0;
             currentLevel++;
-            orcMovementSpeed += 0.1f;
+            orcMovementSpeed += 1.0f;
             if (currentLevel == levelGoals.GetLength(0))
             {
                 return;
