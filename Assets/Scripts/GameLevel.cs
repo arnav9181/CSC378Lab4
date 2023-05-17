@@ -74,7 +74,6 @@ public class GameLevel : MonoBehaviour
         enemyCount--;
         killCount++;
         totalKills++;
-        Debug.Log(totalKills);
 
         if (killCount == levelGoals[currentLevel, 0]) {
             killCount = 0;
