@@ -80,7 +80,7 @@ public class GameLevel : MonoBehaviour
             killCount = 0;
             enemyCount = 0;
             currentLevel++;
-            orcMovementSpeed += 0.75f;
+            orcMovementSpeed += 0.1f;
             if (currentLevel == levelGoals.GetLength(0))
             {
                 return;
@@ -95,7 +95,7 @@ public class GameLevel : MonoBehaviour
         }
         if(totalKills >= 34)
         {
-            SceneManager.LoadScene("EndGame");
+            SceneManager.LoadScene("WinGame");
         }
     }
 
