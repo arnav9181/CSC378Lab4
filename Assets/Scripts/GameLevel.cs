@@ -55,8 +55,8 @@ public class GameLevel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        myText.text = string.Format("Kills = {0}", totalKills);  
-        levelCounter.text = string.Format("Level = {0}", currentLevel+1);  
+        myText.text = string.Format("kills = {0}", totalKills);  
+        levelCounter.text = string.Format("level = {0}", currentLevel+1);  
     }
 
     public static void spawnOrc() {
