@@ -28,9 +28,10 @@ public class Player : MonoBehaviour
         {
             attackedOrcIDs.Add(objectID);
             health--;
-            ShakeBehaviour.TriggerShake();
             if (health == 0) {
                 SceneManager.LoadScene("EndGame");
+                GameLevel.totalKills = 0;
+                GameLevel.currentLevel = 0; 
             }
         }
     }
